@@ -1,8 +1,6 @@
 // Стартовая точка домашней работы.
 // Спроектируйте модель ресурса, запросы и состояния самостоятельно.
 
-console.log('API storefront starter is ready');
-
 const API_URL = 'http://localhost:3000/movies';
 
 const ui = {
@@ -86,3 +84,47 @@ async function fetchMovies() {
 fetchMovies();
 
 ui.reloadBtn.addEventListener('click', fetchMovies);
+
+const form = document.querySelector('[data-form="entry"]');
+const submitBtn = document.querySelector('[data-action="submit"]');
+
+form.addEventListener('submit', async (event) => {
+  event.preventDefault(); 
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Отправка...';
+
+  const formData = new FormData(form);
+  
+  const newMovie = {
+    title: formData.get('title').trim(),
+    director: formData.get('director').trim(),
+    year: Number(formData.get('year')),
+    rating: Number(formData.get('rating'))
+  };
+
+  try {
+    const response = await fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newMovie)
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    form.reset();
+    
+    await fetchMovies(); 
+    
+  } catch (error) {
+    console.error('Ошибка отправки:', error);
+    alert('Не удалось сохранить фильм. Проверьте, запущен ли сервер.');
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Добавить фильм';
+  }
+});
