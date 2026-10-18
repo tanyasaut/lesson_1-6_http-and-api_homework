@@ -10,7 +10,11 @@ const ui = {
   sortSelect: document.querySelector('[data-ui="sort"]'),
   form: document.querySelector('[data-form="entry"]'),
   submitBtn: document.querySelector('[data-action="submit"]'),
+  searchInput: document.querySelector('[data-ui="search"]'),
 };
+
+let currentController = null;
+let debounceTimer = null;    
 
 function renderMovies(movies) {
   ui.collection.innerHTML = '';
@@ -172,25 +176,45 @@ async function fetchMovies() {
   ui.status.innerHTML = `<strong class="status__title">Загрузка...</strong><span class="status__text">Получаем данные от API.</span>`;
   ui.reloadBtn.disabled = true;
 
+  // Отменяем предыдущий незавершенный запрос
+  if (currentController) {
+    currentController.abort();
+  }
+  // Создаем новый контроллер для текущего запроса
+  currentController = new AbortController();
+
   let url = API_URL;
   const sortValue = ui.sortSelect.value;
+  const searchValue = ui.searchInput.value.trim();
+
+  // Формируем параметры
+  const params = new URLSearchParams();
+  if (sortValue === 'year_asc') params.append('_sort', 'year');
+  if (sortValue === 'year_desc') params.append('_sort', '-year');
+  if (sortValue === 'rating_desc') params.append('_sort', '-rating');
   
-  if (sortValue) {
-    if (sortValue === 'year_asc') {
-      url += `?_sort=year`;
-    } else if (sortValue === 'year_desc') {
-      url += `?_sort=-year`;
-    } else if (sortValue === 'rating_desc') {
-      url += `?_sort=-rating`;
-    }
+  // Добавляем поиск (json-server ищет по полю title)
+  if (searchValue) {
+        params.append('title:contains', searchValue);
+  }
+
+  if (params.toString()) {
+    url += `?${params.toString()}`;
   }
 
   try {
-    const response = await fetch(url, { method: 'GET' });
+    const response = await fetch(url, { 
+      method: 'GET',
+      signal: currentController.signal 
+    });
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     const movies = await response.json();
     renderMovies(movies);
   } catch (error) {
+    if (error.name === 'AbortError') {
+      console.log('Запрос отменен: устарел или прерван');
+      return; 
+    }
     console.error('Ошибка загрузки:', error);
     ui.collection.hidden = true;
     ui.status.hidden = false;
@@ -251,3 +275,10 @@ form.addEventListener('submit', async (event) => {
 
 ui.sortSelect.addEventListener('change', fetchMovies);
 
+ui.searchInput.addEventListener('input', () => {
+  clearTimeout(debounceTimer);
+  
+  debounceTimer = setTimeout(() => {
+    fetchMovies(); 
+  }, 500);
+});

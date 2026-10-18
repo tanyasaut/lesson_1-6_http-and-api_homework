@@ -31,7 +31,13 @@
             <h2 class="panel__title" id="collection-title">Коллекция фильмов</h2>
           </div>
           
-           <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+          <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap; justify-content: flex-end; margin-bottom: 16px;">           <input 
+              class="field__control" 
+              type="search" 
+              placeholder="Поиск по названию..." 
+              data-ui="search"
+              style="width: 200px; min-height: 38px;"
+            />
             <select class="field__control" data-ui="sort" style="width: auto; min-height: 38px;">
               <option value="">Без сортировки</option>
               <option value="year_asc">Год (сначала старые)</option>
