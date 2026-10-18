@@ -322,3 +322,35 @@ textarea.field__control {
   }
 }
 
+.card__meta-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px dashed var(--color-line);
+  padding-bottom: 6px;
+  margin-bottom: 6px;
+}
+
+.card__meta-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.card__label {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+
+.card__value {
+  text-align: right;
+  overflow-wrap: anywhere; 
+}
+
+@media (max-width: 560px) {
+  .entry-form__actions .button {
+    width: 100%;
+  }
+}
