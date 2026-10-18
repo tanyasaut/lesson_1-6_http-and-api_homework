@@ -1,12 +1,25 @@
 {
-  "items": [
+  "movies": [
     {
-      "id": "starter-1",
-      "title": "Замените демонстрационную запись",
-      "category": "starter",
-      "value": 0,
-      "isActive": true
+      "id": "1",
+      "title": "Начало",
+      "director": "Кристофер Нолан",
+      "year": 2010,
+      "rating": 8.8
+    },
+    {
+      "id": "2",
+      "title": "Матрица",
+      "director": "Лана Вачовски, Лилли Вачовски",
+      "year": 1999,
+      "rating": 8.7
+    },
+    {
+      "id": "3",
+      "title": "Интерстеллар",
+      "director": "Кристофер Нолан",
+      "year": 2014,
+      "rating": 8.6
     }
   ]
 }
-
