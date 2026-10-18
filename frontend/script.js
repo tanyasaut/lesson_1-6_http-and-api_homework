@@ -169,6 +169,24 @@ function openEditMode(movie, card) {
   card.append(form);
 }
 
+async function deleteMovie(id, btn) {
+  if (!confirm('Вы уверены, что хотите удалить этот фильм?')) return;
+
+  const card = btn.closest('.card');
+  const originalDisplay = card.style.display;
+  card.style.display = 'none'; 
+
+  try {
+    const response = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    await fetchMovies();
+  } catch (error) {
+    console.error('Ошибка удаления:', error);
+    card.style.display = originalDisplay; 
+    alert('Не удалось удалить фильм. Проверьте сервер.');
+  }
+}
+
 async function fetchMovies() {
   ui.collection.hidden = true;
   ui.status.hidden = false;
@@ -176,24 +194,22 @@ async function fetchMovies() {
   ui.status.innerHTML = `<strong class="status__title">Загрузка...</strong><span class="status__text">Получаем данные от API.</span>`;
   ui.reloadBtn.disabled = true;
 
-  // Отменяем предыдущий незавершенный запрос
   if (currentController) {
     currentController.abort();
   }
-  // Создаем новый контроллер для текущего запроса
   currentController = new AbortController();
 
   let url = API_URL;
   const sortValue = ui.sortSelect.value;
   const searchValue = ui.searchInput.value.trim();
 
-  // Формируем параметры
+  
   const params = new URLSearchParams();
   if (sortValue === 'year_asc') params.append('_sort', 'year');
   if (sortValue === 'year_desc') params.append('_sort', '-year');
   if (sortValue === 'rating_desc') params.append('_sort', '-rating');
   
-  // Добавляем поиск (json-server ищет по полю title)
+  
   if (searchValue) {
         params.append('title:contains', searchValue);
   }
