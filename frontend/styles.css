@@ -322,3 +322,64 @@ textarea.field__control {
   }
 }
 
+.card__meta-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px dashed var(--color-line);
+  padding-bottom: 6px;
+  margin-bottom: 6px;
+}
+
+.card__meta-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.card__label {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+
+.card__value {
+  text-align: right;
+  overflow-wrap: anywhere; 
+}
+
+@media (max-width: 560px) {
+  .entry-form__actions .button {
+    width: 100%;
+  }
+}
+
+.card__actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.card__actions .button {
+  flex: 1;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+}
+
+.card--editing {
+  border-color: var(--color-primary);
+  background: #f9f8ff;
+}
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.edit-form .field__control {
+  min-height: 36px;
+  padding: 6px 10px;
+  font-size: 0.9rem;
+}

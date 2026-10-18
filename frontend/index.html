@@ -7,7 +7,7 @@
       name="description"
       content="Стартовый интерфейс домашней работы по HTTP и REST API"
     />
-    <title>API-витрина</title>
+    <title>Каталог фильмов</title>
     <link rel="stylesheet" href="./styles.css" />
     <script src="./script.js" defer></script>
   </head>
@@ -15,10 +15,10 @@
     <header class="page-header">
       <div class="page-header__content">
         <p class="page-header__eyebrow">ДЗ 6 · HTTP и API</p>
-        <h1 class="page-header__title">API-витрина</h1>
+        <h1 class="page-header__title">Каталог фильмов</h1>
         <p class="page-header__lead">
-          Выберите тему, замените демонстрационный ресурс и свяжите этот интерфейс
-          с собственным REST API.
+          Домашняя коллекция. 
+          Данные загружаются с локального REST API.
         </p>
       </div>
     </header>
@@ -28,17 +28,32 @@
         <div class="panel__header">
           <div>
             <p class="panel__eyebrow">Коллекция</p>
-            <h2 class="panel__title" id="collection-title">Объекты из API</h2>
+            <h2 class="panel__title" id="collection-title">Коллекция фильмов</h2>
           </div>
+          
+          <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap; justify-content: flex-end; margin-bottom: 16px;">           <input 
+              class="field__control" 
+              type="search" 
+              placeholder="Поиск по названию..." 
+              data-ui="search"
+              style="width: 200px; min-height: 38px;"
+            />
+            <select class="field__control" data-ui="sort" style="width: auto; min-height: 38px;">
+              <option value="">Без сортировки</option>
+              <option value="year_asc">Год (сначала старые)</option>
+              <option value="year_desc">Год (сначала новые)</option>
+              <option value="rating_desc">Рейтинг (сначала высокий)</option>
+            </select>
 
-          <button class="button button--secondary" type="button" data-action="reload">
-            Обновить
-          </button>
-        </div>
+            <button class="button button--secondary" type="button" data-action="reload">
+             Обновить
+            </button>
+            </div>
+          </div> 
 
         <p class="endpoint">
           Endpoint:
-          <code class="endpoint__value" data-ui="endpoint">http://localhost:3000/items</code>
+          <code class="endpoint__value" data-ui="endpoint">http://localhost:3000/movies</code>
         </p>
 
         <div class="status" data-ui="status" role="status" aria-live="polite">
@@ -53,33 +68,29 @@
         <div class="panel__header">
           <div>
             <p class="panel__eyebrow">Новая запись</p>
-            <h2 class="panel__title" id="form-title">Добавить объект</h2>
+            <h2 class="panel__title" id="form-title">Добавить фильм</h2>
           </div>
         </div>
 
-        <form class="entry-form" data-form="entry">
+                <form class="entry-form" data-form="entry">
           <div class="field">
-            <label class="field__label" for="entry-title">Название</label>
-            <input
-              class="field__control"
-              id="entry-title"
-              name="title"
-              type="text"
-              minlength="2"
-              placeholder="Замените подсказку под свою тему"
-              required
-            />
+            <label class="field__label" for="movie-title">Название</label>
+            <input class="field__control" id="movie-title" name="title" type="text" minlength="2" required />
           </div>
-
-          <p class="entry-form__hint">
-            Добавьте остальные поля своей модели. Всего должно быть не меньше четырех
-            содержательных свойств помимо id.
-          </p>
-
+          <div class="field">
+            <label class="field__label" for="movie-director">Режиссер</label>
+            <input class="field__control" id="movie-director" name="director" type="text" minlength="2" required />
+          </div>
+          <div class="field">
+            <label class="field__label" for="movie-year">Год</label>
+            <input class="field__control" id="movie-year" name="year" type="number" min="1888" max="2100" required />
+          </div>
+          <div class="field">
+            <label class="field__label" for="movie-rating">Рейтинг</label>
+            <input class="field__control" id="movie-rating" name="rating" type="number" step="0.1" min="0" max="10" required />
+          </div>
           <div class="entry-form__actions">
-            <button class="button button--primary" type="submit" data-action="submit">
-              Отправить в API
-            </button>
+            <button class="button button--primary" type="submit" data-action="submit">Добавить фильм</button>
           </div>
         </form>
       </section>

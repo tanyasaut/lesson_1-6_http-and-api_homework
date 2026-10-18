@@ -1,12 +1,32 @@
 {
-  "items": [
+  "movies": [
     {
-      "id": "starter-1",
-      "title": "Замените демонстрационную запись",
-      "category": "starter",
-      "value": 0,
-      "isActive": true
+      "id": "2",
+      "title": "Титаник",
+      "director": "Джеймс Кэмерон",
+      "year": 1997,
+      "rating": 7.9
+    },
+    {
+      "id": "3",
+      "title": "Аватар",
+      "director": "Джеймс Кэмерон",
+      "year": 2009,
+      "rating": 8.3
+    },
+    {
+      "id": "4",
+      "title": "Ла-Ла Ленд",
+      "director": "Дэмьен Шазелл",
+      "year": 2016,
+      "rating": 8
+    },
+    {
+      "title": "Гарри Поттер Гарри Поттер и философский камень",
+      "director": "Крис Коламбус",
+      "year": 2001,
+      "rating": 7.8,
+      "id": "I6Xq0zDbXns"
     }
   ]
 }
-
