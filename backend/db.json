@@ -5,12 +5,12 @@
       "title": "Начало",
       "director": "Кристофер Нолан",
       "year": 2010,
-      "rating": 8.8
+      "rating": 9
     },
     {
       "id": "2",
       "title": "Матрица",
-      "director": "Лана Вачовски, Лилли Вачовски",
+      "director": "ЛанаBananana Вачовски, Лилли Вачовски",
       "year": 1999,
       "rating": 8.7
     },
@@ -20,6 +20,14 @@
       "director": "Кристофер Нолан",
       "year": 2014,
       "rating": 8.6
+    },
+    {
+      "title": "Терминатор",
+      "director": "Джеймс Кэмерон",
+      "year": 1984,
+      "rating": 8.1,
+      "id": "oyfmgZB6Wes"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

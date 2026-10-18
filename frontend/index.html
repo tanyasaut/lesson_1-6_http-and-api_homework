@@ -30,11 +30,20 @@
             <p class="panel__eyebrow">Коллекция</p>
             <h2 class="panel__title" id="collection-title">Коллекция фильмов</h2>
           </div>
+          
+           <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+            <select class="field__control" data-ui="sort" style="width: auto; min-height: 38px;">
+              <option value="">Без сортировки</option>
+              <option value="year_asc">Год (сначала старые)</option>
+              <option value="year_desc">Год (сначала новые)</option>
+              <option value="rating_desc">Рейтинг (сначала высокий)</option>
+            </select>
 
-          <button class="button button--secondary" type="button" data-action="reload">
-            Обновить
-          </button>
-        </div>
+            <button class="button button--secondary" type="button" data-action="reload">
+             Обновить
+            </button>
+            </div>
+          </div> 
 
         <p class="endpoint">
           Endpoint:
